@@ -22,13 +22,9 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-        cache: 'gradle'
-
-    - name: Make Gradle Executable
-      run: chmod +x ./gradlew
 
     - name: Compile Debug APK
-      run: ./gradlew assembleDebug
+      run: gradle assembleDebug
 
     - name: Upload NXandroid APK
       uses: actions/upload-artifact@v4
