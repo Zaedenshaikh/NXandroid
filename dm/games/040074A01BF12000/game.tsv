@@ -52,3 +52,4 @@ window_fn	e25c90c1c136638885659fd55bf8a03b	0x5bf770	0x5bf780	2880x1620
 # DM_FASTBOOT=1: A every 12 presented frames (0.1 s held) from the first present through the boot screen, the title, Continue and the file, a [mark] once 5 frames in a row
 # have 3,000 draws or more (the title has 63, the loading screen 6-9, the first level 5,500 and more) and no presses after it. With the seed save, am start to the first level in 45-50 s on the PNM-N49
 fastboot_env	DM_KEYS=f1:A~0.1*3000/12 DM_MARK_DRAWS=3000 DM_MARK_KEYS_STOP=1
+android_window	960x540

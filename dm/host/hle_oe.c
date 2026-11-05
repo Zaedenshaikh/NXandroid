@@ -149,7 +149,9 @@ static unsigned char g_cpu_oc;
 HLE_FORCE("_ZN2nn2oe21IsCpuOverclockEnabledEv", "CPU overclock state (through apm): what SetCpuOverclockEnabled set, off at start", unsigned, h_oe_CpuOc, void) { return g_cpu_oc; }
 HLE_FORCE("_ZN2nn2oe22SetCpuOverclockEnabledEb", "CPU overclock switch (through apm); the host does not scale clocks", void, h_oe_SetCpuOc, unsigned on) { g_cpu_oc = on & 0xff; }
 // Switch 2 SDKs: the graphics scale, which the SDK takes from am's IGraphicsScalingParametersFunctions (a session the host never opened: null read in
-// oe::GetGraphicsScalingParameters). The SDK maps the parameter's first word 10 / 20 / 30 to scale 0 / 1 / 2. Donkey Kong Bananza keeps it as a quality tier: a byte of its graphics
+// oe::Gif (e && *e >= '0' && *e <= '2' && !e[1]) { v = *e - '0'; LOG("oe: graphics scale %d in every operation mode (DM_GRAPHICS_SCALE)", v); }
+  if (e && *e >= '0' && *e <= '3' && !e[1]) { v = *e - '0'; LOG("oe: graphics scale %d in every operation mode (DM_GRAPHICS_SCALE)", v); }
+           else { if (e && *e) LOG("[RED] DM_GRAPHICS_SCALE=%s: must be 0, 1, 2 or 3; the scale follows the operation mode", e); v = 4; }         else { if (e && *e) LOG("[RED] DM_GRAPHICS_SCALE=%s: must be 0, 1 or 2; the scale follows the operation mode", e); v = 3; }etGraphicsScalingParameters). The SDK maps the parameter's first word 10 / 20 / 30 to scale 0 / 1 / 2. Donkey Kong Bananza keeps it as a quality tier: a byte of its graphics
 // settings (+0x1c7, main+0x549348, next to the handheld flag it takes from the operation mode at +0x1c4), and an index into {3, 12, 16} (main+0x1d1a604) whose value less 3 (0, 9, 13)
 // goes to a renderer parameter (main+0x549614). Which tier the console reports in which mode is not measured: the host answers 0 handheld and 1 console, following the operation mode.
 // Mario Kart World sizes its 3D scenes by it (its display state takes it at main+0x8728f4 in 1.8.0): handheld scale 0 draws 1920x1080, console scale 1 2048x1152 of its 3840x2160
