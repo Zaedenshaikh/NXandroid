@@ -1,14 +1,17 @@
-.github/workflows/android.yml
-name: Compile Android APK
+name: NXandroid nightly
 
 on:
   push:
-    branches: [ "main", "master" ] # Triggers whenever you push changes
-  workflow_dispatch: # Allows you to trigger the compilation manually
+    branches: [ "main", "master" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./android
 
     steps:
     - name: Checkout Source Code
@@ -27,8 +30,8 @@ jobs:
     - name: Compile Debug APK
       run: ./gradlew assembleDebug
 
-    - name: NXandroid
+    - name: Upload NXandroid APK
       uses: actions/upload-artifact@v4
       with:
         name: NXandroid
-        path: app/build/outputs/apk/debug/*.apk
+        path: android/app/build/outputs/apk/debug/*.apk
